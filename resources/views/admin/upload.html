@@ -1,0 +1,14 @@
+<h3>文件上传</h3>
+<form action="/admin/article/handle" method="post" class="j-form" enctype="multipart/form-data">
+    <div>
+        <label for="file">上传文件：</label>
+        <input type="file" name="image" id="file" />
+    </div>
+    <div class="btn">
+        <input type="submit" value="上传" />
+    </div>
+</form>
+<script>
+    main.menuActive('article');
+    main.ajaxForm('.j-form');
+</script>

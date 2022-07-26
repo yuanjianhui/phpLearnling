@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <title>登陆</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/static/common/twitter-bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/static/admin/css/utill.css">
+    <link rel="stylesheet" href="/static/admin/css/mainn.css">
+    <script src="/static/common/jquery/1.12.4/jquery.min.js"></script>
+    <script src="/static/common/twitter-bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="/static/common/toastr.js/2.1.4/toastr.min.js"></script>
+    <script src="/static/admin/js/main.js"></script>
+</head>
+
+<body class="login">
+<div class="limiter">
+    <div class="container-login100">
+        <div class="wrap-login100">
+            <div class="login100-form-title" style="background-image: url(66.jpg);">
+                <span class="login100-form-title-1">大学生交流平台</span>
+            </div>
+<div class="container">
+    <form method="post" action="/admin/login/login" class="j-login" style="background-image: url(66.jpg);">
+        <h1>&nbsp;&nbsp;</h1>
+        <div class="wrap-input100 validate-input m-b-26" data-validate="用户名不能为空">
+            <span class="label-input100">用户名</span>
+            <input class="input100" type="text" name="username" placeholder="请输入用户名" required>
+            <span class="focus-input100"></span>
+        </div>
+        <div class="wrap-input100 validate-input m-b-18" data-validate="密码不能为空">
+            <span class="label-input100">密码</span>
+            <input class="input100" type="password" name="password" placeholder="请输入密码" required>
+            <span class="focus-input100"></span>
+        </div>
+
+        <div class="flex-sb-m w-full p-b-30">
+            <div class="contact100-form-checkbox">
+                <input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
+                <label class="label-checkbox100" for="ckb1">记住我</label>
+            </div>
+            <div>
+                <a href="javascript:" class="txt1">忘记密码？</a>
+            </div>
+        </div>
+        <div class="form-group">
+            <input type="text" name="captcha" class="form-control" placeholder="验证码" required>
+        </div>
+        <div class="form-group">
+            <div class="login-captcha"><img src="/admin/login/captcha" alt="captcha"></div>
+        </div>
+        <div class="form-group">
+            <input type="submit" class="btn btn-lg btn-success" value="登录">
+        </div>
+    </form>
+</div>
+        </div>
+    </div>
+    <div class="main-loading" style="display:none">
+        <div class="dot-carousel"></div>
+    </div>
+</div>
+</div>
+<script>
+    $('.login-captcha img').click(function () {
+        $(this).attr('src', '/admin/login/captcha?_=' + Math.random());
+    });
+    main.ajaxForm('.j-login', function () {
+        location.href = '/admin/index/index'
+    }, function () {
+        $('.login-captcha img').click();
+    });
+</script>
+
+<script src="/public/static/admin/js/jquery-3.2.1.min.js"></script>
+<script src="/public/static/admin/js/jquery-3.2.1.min.js"></script>
+
+</body>
+
+</html>

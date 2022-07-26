@@ -1,0 +1,55 @@
+<div class="main-title">
+    <h2>{if $id}修改{else}添加{/if}问题</h2>
+</div>
+<div class="main-section">
+    <form method="post" action="/admin/question/save" class="j-form">
+        <ul class="form-group form-inline">
+            <li>
+                <input type="text" class="form-control" name="title" value="{$data.title}" required>
+                <label>问题标题</label>
+            </li>
+            <li>
+                <select name="cid" class="form-control" style="min-width:196px;">
+                    <option value="0">---</option>
+                    {foreach $category as $v}
+                    <option value="{$v.id}" {if $v.id===$data.cid}selected{/if}>{$v.name} </option>
+                    {/foreach}
+                </select>
+                <label>所属分类</label>
+            </li>
+            <li>
+                <input type="text" class="form-control" name="author" value="{$data.author}" required>
+                <label>作者</label>
+            </li>
+            <li>
+                <label>问题内容</label>
+                <div><textarea class="j-content" name="content" style="height:200px">{$data.content}</textarea></div>
+            </li>
+            <li>
+                <label><input type="checkbox" name="show" value="1" {if $data.show}checked{/if}> 发布</label>
+            </li>
+            <li>
+                <input type="hidden" name="id" value="{$id}">
+                <input type="submit" value="提交表单" class="btn btn-primary">
+                <a href="/admin/question/index" class="btn btn-default">返回列表</a>
+            </li>
+        </ul>
+    </form>
+</div>
+<script>
+    main.menuActive('question');
+    main.ajaxForm('.j-form', function () {
+        main.content('/admin/question/index');
+    });
+    main.loadJS('/static/admin/editor/ueditor1.4.3.3/ueditor.config.js');
+    main.loadJS('/static/admin/editor/ueditor1.4.3.3/ueditor.all.min.js');
+    main.loadJS('/static/admin/editor/main.editor.js');
+    main.editor($('.j-content'), 'question_edit', function(opt) {
+        opt.UEDITOR_HOME_URL = '/static/admin/editor/ueditor1.4.3.3/'
+    }, function(editor) {
+        $('.j-form').submit(function() {
+            //同步编辑器内容
+            editor.sync();
+        });
+    });
+</script>

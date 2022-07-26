@@ -1,0 +1,40 @@
+<div class="as">
+  {if $article}
+    <div class="as-title"><h1>{$article.title}</h1></div>
+    <div class="as-row">
+      <span>栏目：
+          {if isset($category_name)}
+            <a href="/show?id={$article.cid}">{$category_name}</a>
+          {else}
+            无
+          {/if}
+        </span>
+      <span>作者：{$article.author}</span>
+      <span>发表时间：{$article.created_at}</span>
+      <span>阅读：{$article.views}次</span>
+    </div>
+    <div class="as-content">{$article.content nofilter}</div>
+    <div class="as-change">
+      <span>上一篇：
+        {if $article_prev}
+          <a href="/show?id={$article_prev.id}"
+          title="{$article_prev.title}">{$article_prev.title}</a>
+        {else}
+          无
+        {/if}
+      </span>
+      <span>下一篇：
+        {if $article_next}
+          <a href="/show?id={$article_next.id}"
+          title="{$article_next.title}">{$article_next.title}</a>
+        {else}
+          无
+        {/if}
+      </span>
+    </div>
+  {else}
+    <div class="as-message">
+      您查看的文章不存在。<p><a href="/">点我返回首页</a></p>
+    </div>
+  {/if}
+</div>

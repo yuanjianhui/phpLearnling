@@ -1,0 +1,63 @@
+<div class="main-title">
+    <h2>{if $id}修改{else}添加{/if}视频</h2>
+</div>
+<div class="main-section">
+    <form method="post" action="/admin/video/save" class="j-form">
+        <ul class="form-group form-inline">
+            <li>
+                <input type="text" class="form-control" name="title" value="{$data.title}" required>
+                <label>视频类型</label>
+            </li>
+            <li>
+                <select name="cid" class="form-control" style="min-width:196px;">
+                    <option value="0">---</option>
+                    {foreach $category as $v}
+                    <option value="{$v.id}" {if $v.id===$data.cid}selected{/if}>{$v.name} </option>
+                    {/foreach}
+                </select>
+                <label>所属分类</label>
+            </li>
+            <li>
+                <input type="text" class="form-control" name="author" value="{$data.author}" required>
+                <label>作者</label>
+            </li>
+            <li>
+                <label>视频</label>
+                <input type="file" name="video">
+            </li>
+            {if $data.video}
+            <li>
+                <ul class="main-imglist">
+                    <li>
+                        <div class="main-imglist-item">
+                            <a href="/uploads/video/{$data.video}" target="_blank"><video src="/uploads/video/{$data.video}" style="height: 120px;width: 120px"></video></a>
+                        </div>
+                    </li>
+                </ul>
+            </li>
+            {/if}
+            <li>
+                <input type="hidden" name="id" value="{$id}">
+                <input type="submit" value="提交表单" class="btn btn-primary">
+                <a href="/admin/video/shows" class="btn btn-default">返回列表</a>
+            </li>
+        </ul>
+    </form>
+</div>
+<script>
+    main.menuActive('video');
+    main.ajaxForm('.j-form', function () {
+        main.content('/admin/video/shows');
+    });
+    main.loadJS('/static/admin/editor/ueditor1.4.3.3/ueditor.config.js');
+    main.loadJS('/static/admin/editor/ueditor1.4.3.3/ueditor.all.min.js');
+    main.loadJS('/static/admin/editor/main.editor.js');
+    main.editor($('.j-content'), 'article_edit', function(opt) {
+        opt.UEDITOR_HOME_URL = '/static/admin/editor/ueditor1.4.3.3/'
+    }, function(editor) {
+        $('.j-form').submit(function() {
+            //同步编辑器内容
+            editor.sync();
+        });
+    });
+</script>
